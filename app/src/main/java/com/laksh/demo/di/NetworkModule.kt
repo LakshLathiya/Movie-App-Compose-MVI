@@ -1,24 +1,31 @@
 package com.laksh.demo.di
 
 
+import android.content.Context
+import com.laksh.demo.data.repository.MovieRepository
+import com.laksh.demo.data.repository.MovieRepositoryImpl
 import com.laksh.demo.remote.MovieApi
 import com.laksh.demo.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
     @Singleton
     @Provides
     fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY } }
+        return HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+    }
+
     @Singleton
     @Provides
     fun providesOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
@@ -26,6 +33,7 @@ class NetworkModule {
             .addInterceptor(httpLoggingInterceptor)
             .build()
     }
+
     @Singleton // We want ony one instance of retrofit object in Application
     @Provides
     fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
@@ -35,6 +43,7 @@ class NetworkModule {
             .client(okHttpClient)
             .build()
     }
+
     @Singleton
     @Provides
     fun providesMovieApi(retrofit: Retrofit): MovieApi {

@@ -11,10 +11,16 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import javax.inject.Inject
 
-class MovieRepository @Inject constructor(
+interface MovieRepository {
+    fun getMoviesPaginated(): Flow<PagingData<Result>>
+
+    suspend fun getMovieDetails(movieId: Int): Response<MovieDetails>
+}
+
+class MovieRepositoryImpl @Inject constructor(
     private val movieApi: MovieApi
-) {
-    fun getMoviesPaginated(): Flow<PagingData<Result>> {
+) : MovieRepository {
+    override fun getMoviesPaginated(): Flow<PagingData<Result>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 20,
@@ -25,9 +31,7 @@ class MovieRepository @Inject constructor(
         ).flow
     }
 
-    suspend fun getMovieDetails(movieId: Int): Response<MovieDetails> {
+    override suspend fun getMovieDetails(movieId: Int): Response<MovieDetails> {
         return movieApi.getMovieDetails(movieId)
     }
 }
-
-
