@@ -1,15 +1,11 @@
 package com.laksh.demo.di
 
 
-import android.content.Context
-import com.laksh.demo.data.repository.MovieRepository
-import com.laksh.demo.data.repository.MovieRepositoryImpl
 import com.laksh.demo.remote.MovieApi
 import com.laksh.demo.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
