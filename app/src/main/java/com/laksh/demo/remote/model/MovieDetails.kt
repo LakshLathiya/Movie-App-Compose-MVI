@@ -1,0 +1,16 @@
+package com.laksh.demo.remote.model
+
+data class MovieDetails(
+    val genres: List<Genre>? = null,
+    val overview: String? = null,
+    val poster_path: String? = null,
+    val release_date: String? = null,
+    val title: String? = null,
+    val id: Int? = null,
+    val vote_average: Double? = null,
+)
+
+data class Genre(
+    val id: Int? = null,
+    val name: String? = null
+)
