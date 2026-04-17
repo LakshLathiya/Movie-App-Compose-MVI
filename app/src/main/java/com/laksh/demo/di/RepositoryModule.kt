@@ -2,18 +2,21 @@ package com.laksh.demo.di
 
 import com.laksh.demo.data.repository.MovieRepository
 import com.laksh.demo.data.repository.MovieRepositoryImpl
-import dagger.Binds
+import com.laksh.demo.remote.MovieApi
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class RepositoryModule {
+class RepositoryModule {
 
-    @Binds
+    @Provides
     @Singleton
-    abstract fun bindMovieRepository(impl: MovieRepositoryImpl): MovieRepository
+    fun provideMovieRepository(movieApi: MovieApi): MovieRepository {
+        return MovieRepositoryImpl(movieApi)
+    }
 }
 
