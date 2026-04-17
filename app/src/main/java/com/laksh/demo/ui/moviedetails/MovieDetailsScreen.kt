@@ -1,6 +1,7 @@
 package com.laksh.demo.ui.moviedetails
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -67,7 +68,7 @@ fun MovieDetailsScreen(
             TopAppBar(
                 title = { Text("Movie Details") },
                 navigationIcon = {
-                    Text("Back")
+                    Text("Back", modifier = Modifier.clickable { onBackClick() })
                 }
             )
         }
